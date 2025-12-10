@@ -8,13 +8,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Section = styled.section`
-  padding: 5rem 2rem;
+  padding: -5rem 2rem;
   background-color: var(--Background);
   position: relative;
 `;
 
 const TimelineContainer = styled.div`
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   position: relative;
 `;
@@ -82,10 +82,11 @@ const Content = styled.div`
 `;
 
 const milestones = [
-    { year: '2020', title: 'Foundation', desc: 'We started our journey with a small team.' },
-    { year: '2021', title: 'Expansion', desc: 'Opened 3 new offices across the country.' },
-    { year: '2022', title: 'Innovation', desc: 'Launched our flagship digital product.' },
-    { year: '2023', title: 'Global', desc: 'Started operations in international markets.' },
+    { year: '1953', title: 'Foundation', desc: 'PT . Swadharma Sangga Buana merupakan anak perusahaan Yang didirikan oleh yayasan Danar Dana Swadharma, PT . Bank Negara Indonesia (Persero), Tbk.' },
+    { year: '1953', title: 'Journey', desc: 'Perjalanan PT .SSB, berawal dari bisnis dibidang Perhotelan sejak tahun 1953, berlokasi di Cipanas– Cianjur dan terus berkembang hingga saat ini menjadi Resort & Convention Hotel.' },
+    { year: '2012', title: 'Beginning', desc: 'Seiring dengan perkembangan bisnis akan berbagai kebutuhan berbagai macam jasa layanan, tahun 2012 bisnis BM-TAD (jasa layanan kebersihan dan pengamanan gedung kantor, pengelolaan tenaga outsourcing).' },
+    { year: '2013', title: 'Innovating', desc: 'Tahun 2013membuka jasa persewaan kendaraan Pick Up service uang, kendaraanoperasional mitra bisnis.' },
+    { year: '2014', title: 'Expanding', desc: ' PT . SSB juga menggeluti bisnis di bidang properti (pembangunan perumahan,jual beli dan renovasi properti), pengelolaan limbah elektronik dan equipment,pekerjaan renovasi bangunan gedung dan kantor, jasa pemeliharaan dankebersihan ruang ATM, berikut AC dan elektrikal lainnya.' },
 ];
 
 const HistoryTimeline = () => {

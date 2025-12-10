@@ -7,8 +7,8 @@ export default function Profile() {
     return (
         <main style={{ minHeight: '100vh', paddingTop: '80px', backgroundColor: 'var(--Background)' }}>
             <ProfileHero />
-            <ValuesSection />
             <HistoryTimeline />
+            <ValuesSection />
             <TeamGrid />
         </main>
     );

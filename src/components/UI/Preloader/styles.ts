@@ -2,8 +2,8 @@
 import { styled } from 'styled-components';
 
 export const Wrapper = styled.div`
-  background: var(--Background);
-  color: var(--white);
+  background: linear-gradient(to bottom, white, green);
+  color: white;
   position: fixed;
   height: 100vh;
   width: 100vw;
@@ -58,7 +58,7 @@ export const Inner = styled.div`
 `;
 
 export const SecondOverlay = styled.div`
-  background: var(--emerald);
+  background: wihite;
   position: fixed;
   height: 100vh;
   width: 100vw;

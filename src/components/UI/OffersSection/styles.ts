@@ -119,7 +119,7 @@ export const Offers = styled.div`
       flex: 1;
 
       ${ImageCtn} {
-        margin-top: 5.7rem;
+        margin-top: 1rem;
         flex: 2;
       }
 
@@ -133,7 +133,7 @@ export const Offers = styled.div`
       flex: 2;
 
       ${ImageCtn} {
-        margin-top: 5.7rem;
+        margin-top: 1rem;
         flex: 2;
         margin-left: auto;
       }
@@ -153,7 +153,7 @@ export const Offers = styled.div`
         flex: 1;
 
         ${ImageCtn} {
-          margin-top: 4.78rem;
+          margin-top: 2rem;
           flex: 1;
         }
 
@@ -166,7 +166,7 @@ export const Offers = styled.div`
         flex: 1;
 
         ${ImageCtn} {
-          margin-top: 5.7rem;
+          margin-top: 2rem;
           flex: 1;
           margin-left: auto;
         }
