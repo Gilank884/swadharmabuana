@@ -4,18 +4,34 @@ import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import Image from 'next/image';
-import logoPT from '../.. /../../../public/logo.png';
+import logoPT from '../../../public/logo.png';
+import Kantor from '../../../public/images/kantor.jpeg';
 
+/* WRAPPER */
 const HeroSection = styled.section`
+
   height: 90vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4rem 6rem;
-  background: white;
+  padding: 3rem 6rem;
+  background: url(${Kantor.src});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   position: relative;
   overflow: hidden;
+
+  /* overlay biar teks tetap terbaca */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.15);
+    z-index: 0;
+  }
 
   @media (max-width: 900px) {
     flex-direction: column;
@@ -26,92 +42,150 @@ const HeroSection = styled.section`
   }
 `;
 
-/* Soft Green Aurora Background */
+/* Aurora gradient lembut */
 const Aurora = styled.div`
   position: absolute;
-  top: 10%;
-  left: -10%;
-  width: 120%;
-  height: 120%;
-  filter: blur(60px);
-  z-index: 0;
+  inset: 0;
+  background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.6) 0%,
+      rgba(255,255,255,0.4) 35%,
+      rgba(0, 200, 100, 0.12) 70%,
+      rgba(0, 200, 100, 0.2) 100%
+  );
+  z-index: 1;
+`;
+
+/* Aurora bergerak */
+const AuroraMotion = styled.div`
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+
+  background: radial-gradient(
+    circle at 20% 30%,
+    rgba(0, 200, 100, 0.3),
+    rgba(0, 200, 100, 0.08),
+    transparent 70%
+  );
+
+  mix-blend-mode: screen;
+  filter: blur(80px);
+  animation: floatAurora 10s ease-in-out infinite alternate;
+
+  @keyframes floatAurora {
+    0%   { transform: translate(-10%, -5%) scale(1); opacity: .6; }
+    50%  { transform: translate(10%, 5%) scale(1.15); opacity: .85; }
+    100% { transform: translate(20%, 0%) scale(1); opacity: .7; }
+  }
 `;
 
 const LeftSide = styled.div`
-margin-right: 2rem;
   flex: 1;
-  z-index: 2;
+  z-index: 3;
+`;
+
+const Title = styled.h1`
+  font-size: 3.6rem;
+  font-weight: 800;
+  color: #ffffffff;
+  line-height: 1.1;
+  margin-bottom: 1.8rem;
+  opacity: 0;
+  transform: translateY(40px);
+
+  span {
+    background: linear-gradient(90deg, #ffffffff, #ffffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2.6rem;
+  }
+`;
+
+const Subtitle = styled.p`
+  font-size: 1.2rem;
+  color: #333;
+  max-width: 550px;
+  line-height: 1.65;
+  opacity: 0;
+  transform: translateY(40px);
+  z-index: 3;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    max-width: 100%;
+  }
 `;
 
 const RightSide = styled.div`
-margin-bottom: 12rem;
   flex: 1;
   position: relative;
+  z-index: 3;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const GlassCircle = styled.div`
+const LogoGlow = styled.div`
   position: absolute;
-  width: 320px;
-  height: 320px;
-`;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 200, 100, 0.3),
+    rgba(0, 200, 100, 0.07),
+    transparent
+  );
+  filter: blur(50px);
+  z-index: 2;
+  animation: pulse 6s ease-in-out infinite;
 
-const Title = styled.h1`
-  font-size: 4rem;
-  font-weight: 800;
-  margin-top: -13rem;
-  color: #111;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  transform: translateY(40px);
-
-  span {
-    color: #00c763ff;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 3rem;
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.55; }
+    50% { transform: scale(1.15); opacity: 0.75; }
+    100% { transform: scale(1); opacity: 0.55; }
   }
 `;
 
-const Subtitle = styled.p`
-  font-size: 1.3rem;
-  color: #000000ff;
-  max-width: 500px;
-  opacity: 0;
-  transform: translateY(40px);
+const LogoWrap = styled.div`
+  position: relative;
+  z-index: 3;
+  transition: 0.4s ease;
+
+  &:hover {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 40px rgba(0, 200, 100, 0.45));
+  }
 `;
 
 const ProfileHero = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const logoRef = useRef(null);
 
   useEffect(() => {
-    // Title animation
     gsap.to(titleRef.current, {
       opacity: 1,
       y: 0,
       duration: 1.3,
-      ease: 'power4.out',
+      ease: 'power4.out'
     });
 
-    // Subtitle animation
     gsap.to(subtitleRef.current, {
       opacity: 1,
       y: 0,
       duration: 1.1,
-      delay: 0.3,
-      ease: 'power3.out',
+      delay: 0.25,
+      ease: 'power3.out'
     });
 
-    // Floating Logo
     gsap.to(logoRef.current, {
       y: -10,
-      duration: 3,
+      duration: 3.5,
       repeat: -1,
       yoyo: true,
       ease: 'ease.inOut',
@@ -121,30 +195,23 @@ const ProfileHero = () => {
   return (
     <HeroSection>
       <Aurora />
+      <AuroraMotion />
 
-      {/* LEFT SIDE */}
       <LeftSide>
         <Title ref={titleRef}>
           <span>PT. Swadharma Sangga Buana</span>
         </Title>
 
         <Subtitle ref={subtitleRef}>
-          PT. Swadharma Sanggah Buana hadir sebagai mitra terpercaya yang menyediakan layanan operasional terpadu mulai dari alih daya, penyewaan kantor, hingga kendaraan untuk membantu perusahaan bekerja lebih efisien, hemat waktu, dan terstruktur. Dengan dukungan tenaga profesional, armada yang terawat, serta sistem layanan yang responsif, kami memastikan setiap kebutuhan operasional klien berjalan lancar dan berkualitas. Komitmen kami adalah memberikan kemudahan, keandalan, dan efektivitas jangka panjang, sehingga perusahaan dapat fokus pada pertumbuhan dan mencapai kinerja terbaiknya.
+          PT. Swadharma Sanggah Buana hadir sebagai mitra terpercaya...
         </Subtitle>
       </LeftSide>
 
-      {/* RIGHT SIDE */}
       <RightSide>
-        <GlassCircle />
-        <div ref={logoRef} style={{ position: 'relative', zIndex: 3 }}>
-          <Image
-            src={logoPT}
-            alt="Logo PT"
-            width={360}
-            height={360}
-            style={{ filter: 'drop-shadow(0px 0px 20px rgba(0,200,100,0.4))' }}
-          />
-        </div>
+        <LogoGlow />
+        <LogoWrap ref={logoRef}>
+          <Image src={logoPT} alt="Logo PT" width={360} height={360} />
+        </LogoWrap>
       </RightSide>
     </HeroSection>
   );
