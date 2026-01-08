@@ -96,9 +96,9 @@ const Step = styled.div`
 `;
 
 const steps = [
-  { num: '01', title: 'Consultation', desc: 'Understanding your unique challenges and goals.' },
-  { num: '02', title: 'Strategy', desc: 'Developing a tailored roadmap for success.' },
-  { num: '03', title: 'Implementation', desc: 'Executing the plan with precision and expertise.' },
+  { num: '01', title: 'Konsultasi', desc: 'Memahami tantangan dan tujuan unik bisnis Anda.' },
+  { num: '02', title: 'Strategi', desc: 'Mengembangkan peta jalan yang disesuaikan untuk kesuksesan.' },
+  { num: '03', title: 'Implementasi', desc: 'Mengeksekusi rencana dengan presisi dan keahlian.' },
 ];
 
 const ProcessSteps = () => {
@@ -136,7 +136,7 @@ const ProcessSteps = () => {
     <Section>
       <Container>
         <Header>
-          <h2>How We Work</h2>
+          <h2>Cara Kerja Kami</h2>
         </Header>
         <StepsContainer ref={containerRef}>
           <Line><div className="fill"></div></Line>

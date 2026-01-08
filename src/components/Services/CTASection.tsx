@@ -70,8 +70,8 @@ const CTASection = () => {
 
     return (
         <Section>
-            <Title>Ready to Transform Your Business?</Title>
-            <Button ref={btnRef}>Get Started Now</Button>
+            <Title>Siap Mengembangkan Bisnis Anda?</Title>
+            <Button ref={btnRef}>Hubungi Kami Sekarang</Button>
         </Section>
     );
 };

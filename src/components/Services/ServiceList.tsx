@@ -7,6 +7,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+import ImageWrapper from '../Common/ImageWrapper';
+
 const Section = styled.section`
   padding: 6rem 2rem;
 `;
@@ -52,19 +54,82 @@ const ItemContent = styled.div`
   height: 0;
   overflow: hidden;
   
+  .content-inner {
+    padding-top: 2rem;
+    display: flex;
+    gap: 2rem;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
   p {
-    padding-top: 1.5rem;
+    flex: 1;
     color: var(--link-color);
     font-size: 1.1rem;
-    max-width: 600px;
+    line-height: 1.6;
+  }
+`;
+
+const ImageContainer = styled.div`
+  flex: 1;
+  max-width: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    max-width: 100%;
+    height: 250px;
   }
 `;
 
 const services = [
-  { title: 'Digital Transformation', desc: 'Reimagining business processes with modern digital tools.' },
-  { title: 'Cloud Infrastructure', desc: 'Scalable, secure, and efficient cloud solutions for your enterprise.' },
-  { title: 'Data Analytics', desc: 'Turning raw data into actionable insights for better decision making.' },
-  { title: 'Cybersecurity', desc: 'Protecting your digital assets with state-of-the-art security protocols.' },
+  {
+    title: 'Jasa Persewaan Kendaraan Angkutan',
+    desc: 'Solusi transportasi andal untuk kebutuhan logistik dan mobilitas perusahaan Anda dengan armada yang terawat.',
+    img: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    title: 'Jasa Pengelola Gedung',
+    desc: 'Layanan manajemen gedung profesional untuk memastkan operasional properti Anda berjalan efisien dan optimal.',
+    img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    title: 'Jasa Pelayanan Kebersihan',
+    desc: 'Layanan kebersihan menyeluruh untuk lingkungan kerja yang sehat, higienis, dan nyaman bagi produktivitas.',
+    img: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    title: 'Jasa Renovasi Gedung Dan Kantor',
+    desc: 'Transformasi ruang kerja Anda dengan layanan renovasi yang mengutamakan fungsi, estetika, dan kualitas.',
+    img: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    title: 'Jasa Konstruksi',
+    desc: 'Pengerjaan konstruksi kokoh dan presisi, ditangani oleh tenaga ahli berpengalaman di bidang sipil.',
+    img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    title: 'Jasa Pengamanan Gedung',
+    desc: 'Sistem keamanan terpadu dan personel terlatih untuk melindungi aset serta memastikan keamanan lingkungan gedung.',
+    img: 'https://images.unsplash.com/photo-1590247813693-5541d1c609fd?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    title: 'Beli, Renovasi & Jual Properti',
+    desc: 'Layanan end-to-end untuk investasi properti, mulai dari akuisisi, peningkatan nilai melalui renovasi, hingga penjualan.',
+    img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    title: 'Pengelola Limbah Elektronik & Equipment',
+    desc: 'Penanganan limbah elektronik yang ramah lingkungan dan sesuai regulasi untuk masa depan yang lebih berkelanjutan.',
+    img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    title: 'Jasa Alih Daya SDM',
+    desc: 'Penyediaan tenaga kerja profesional dan terlatih untuk berbagai posisi operasional dan administratif, mendukung efisiensi bisnis Anda.',
+    img: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80'
+  }
 ];
 
 const ServiceList = () => {
@@ -93,7 +158,20 @@ const ServiceList = () => {
               <span>{openIndex === i ? '-' : '+'}</span>
             </ItemHeader>
             <ItemContent ref={el => contentRefs.current[i] = el}>
-              <p>{s.desc}</p>
+              <div className="content-inner">
+                <ImageContainer>
+                  <ImageWrapper
+                    src={s.img}
+                    alt={s.title}
+                    width={400}
+                    height={300}
+                    widthCSS="100%"
+                    heightCSS="100%"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </ImageContainer>
+                <p>{s.desc}</p>
+              </div>
             </ItemContent>
           </ServiceItem>
         ))}

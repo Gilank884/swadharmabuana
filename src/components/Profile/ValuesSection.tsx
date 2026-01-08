@@ -84,7 +84,7 @@ const Card = styled.div<{ taller?: boolean }>`
   /* VISI lebih tinggi */
   min-height: ${(props) => (props.taller ? '420px' : '350px')};
 
-  background: #f1f1f1ff;
+  background: transparent;
   border: 1px solid #2f2f2f;
   box-shadow: 0 0 40px rgba(0, 200, 120, 0.07);
 

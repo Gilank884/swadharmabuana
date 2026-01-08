@@ -182,4 +182,8 @@ color: #000000ff;
     font-size: 0.875rem;
     gap: 0.25rem;
   }
+
+  img {
+    filter: brightness(0);
+  }
 `;
