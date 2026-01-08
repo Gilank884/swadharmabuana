@@ -11,10 +11,10 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
-      <Featured />
       <HistoryTimeline />
-      <FinancilaFreedom />
+      <Featured />
       <FinancialFuture />
+      <FinancilaFreedom />
       <FAQ />
     </main>
   );

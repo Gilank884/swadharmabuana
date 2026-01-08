@@ -8,7 +8,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Section = styled.section`
-  padding: -5rem 2rem;
+
+  padding: 5rem 2rem;
   position: relative;
 `;
 
