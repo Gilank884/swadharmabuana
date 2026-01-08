@@ -1,19 +1,18 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ImageWrapper from '../Common/ImageWrapper';
 import Masauddin from '../../../public/images/masaudin.png';
 import Dadangsuryawan from '../../../public/images/dadang.png';
-import NusyirwanIsmail from '../../../public/team/nusyirwan-ismail.jpg';
+import NusyirwanIsmail from '../../../public/images/profile.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Section = styled.section`
     padding: 6rem 2rem;
-    background: #ffffff;
     overflow: hidden;
   `;
 
@@ -51,25 +50,30 @@ const PersonCard = styled.div`
     gap: 2rem;
     align-items: center;
 
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
     padding: 2rem;
     border-radius: 18px;
+    cursor: pointer;
 
     border: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    transition: 0.35s ease;
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 
     opacity: 0;
     transform: translateY(40px);
 
-    /* HOVER: pindah posisi foto ke kanan */
-    &:hover {
+    /* ACTIVE STATE (Click) */
+    &.active {
       flex-direction: row-reverse;
       box-shadow: 0 16px 42px rgba(0, 0, 0, 0.13);
+      background: rgba(255, 255, 255, 0.08);
     }
 
     @media (max-width: 768px) {
       flex-direction: column;
+      &.active {
+        flex-direction: column; 
+      }
     }
   `;
 
@@ -82,7 +86,7 @@ const Photo = styled.div`
 
     border: 1px solid rgba(0, 0, 0, 0.12);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-    transition: 0.35s ease;
+    transition: 0.6s ease;
 
     img {
       width: 100%;
@@ -93,7 +97,7 @@ const Photo = styled.div`
 
 const Info = styled.div`
     flex: 1;
-    transition: 0.35s ease;
+    transition: 0.6s ease;
 
     h3 {
       font-size: 1.6rem;
@@ -113,7 +117,9 @@ const Info = styled.div`
       color: #555;
       line-height: 1.65;
       font-size: 1rem;
-      transition: 0.25s ease;
+      transition: opacity 0.4s ease, max-height 0.4s ease;
+      max-height: 100px; /* arbitrary height to allow animation */
+      opacity: 1;
     }
 
     ul.experience {
@@ -125,19 +131,21 @@ const Info = styled.div`
       opacity: 0;
       max-height: 0;
       overflow: hidden;
-      transition: 0.35s ease;
+      transition: opacity 0.6s ease, max-height 0.6s ease;
     }
 
-    /* Saat hover card → deskripsi hilang, experience muncul */
-    ${PersonCard}:hover & {
+    /* Saat active card → deskripsi hilang, experience muncul */
+    ${PersonCard}.active & {
       p.desc {
         opacity: 0;
         max-height: 0;
+        margin: 0;
       }
 
       ul.experience {
         opacity: 1;
-        max-height: 400px;
+        max-height: 500px; /* large enough to fit content */
+        margin-top: 1rem;
       }
     }
   `;
@@ -152,7 +160,7 @@ const team = [
       "Pengalaman kerja di Bank BNI 1946 30 tahun, sebagai Analis Kredit,Marketing Funding, Control Intern, Pemimpin Bidang Operasional,Pemimpin Cabang, Pemimpin Pengawasan PT . Tri Handayani Utama,Direktur Keuangan PT . Swadharma Griya Satya, Bidang Penghimpunan Yayasan Bamuis BNI, Bendahara Induk Koperasi Swadharma Sejahtera Bersama."
     ],
     img:
-      Masauddin
+      NusyirwanIsmail
   },
   {
     title: "Direktur Utama",
@@ -182,6 +190,7 @@ const team = [
 ];
 
 const TeamStructure = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const blockRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -201,6 +210,10 @@ const TeamStructure = () => {
     }
   }, []);
 
+  const handleCardClick = (index: number) => {
+    setActiveIndex(prev => prev === index ? null : index);
+  };
+
   return (
     <Section>
       <Container>
@@ -211,7 +224,11 @@ const TeamStructure = () => {
 
         <Block ref={blockRef}>
           {team.map((person, i) => (
-            <PersonCard key={i}>
+            <PersonCard
+              key={i}
+              className={activeIndex === i ? 'active' : ''}
+              onClick={() => handleCardClick(i)}
+            >
               <Photo>
                 <ImageWrapper
                   src={person.img}

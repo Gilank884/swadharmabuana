@@ -9,7 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Section = styled.section`
   padding: 6rem 2rem;
-  background-color: var(--Background);
 `;
 
 const Container = styled.div`
@@ -62,45 +61,45 @@ const ItemContent = styled.div`
 `;
 
 const services = [
-    { title: 'Digital Transformation', desc: 'Reimagining business processes with modern digital tools.' },
-    { title: 'Cloud Infrastructure', desc: 'Scalable, secure, and efficient cloud solutions for your enterprise.' },
-    { title: 'Data Analytics', desc: 'Turning raw data into actionable insights for better decision making.' },
-    { title: 'Cybersecurity', desc: 'Protecting your digital assets with state-of-the-art security protocols.' },
+  { title: 'Digital Transformation', desc: 'Reimagining business processes with modern digital tools.' },
+  { title: 'Cloud Infrastructure', desc: 'Scalable, secure, and efficient cloud solutions for your enterprise.' },
+  { title: 'Data Analytics', desc: 'Turning raw data into actionable insights for better decision making.' },
+  { title: 'Cybersecurity', desc: 'Protecting your digital assets with state-of-the-art security protocols.' },
 ];
 
 const ServiceList = () => {
-    const [openIndex, setOpenIndex] = useState<number | null>(null);
-    const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    useEffect(() => {
-        contentRefs.current.forEach((el, i) => {
-            if (el) {
-                if (i === openIndex) {
-                    gsap.to(el, { height: 'auto', duration: 0.5, ease: 'power2.out' });
-                } else {
-                    gsap.to(el, { height: 0, duration: 0.5, ease: 'power2.in' });
-                }
-            }
-        });
-    }, [openIndex]);
+  useEffect(() => {
+    contentRefs.current.forEach((el, i) => {
+      if (el) {
+        if (i === openIndex) {
+          gsap.to(el, { height: 'auto', duration: 0.5, ease: 'power2.out' });
+        } else {
+          gsap.to(el, { height: 0, duration: 0.5, ease: 'power2.in' });
+        }
+      }
+    });
+  }, [openIndex]);
 
-    return (
-        <Section>
-            <Container>
-                {services.map((s, i) => (
-                    <ServiceItem key={i} onClick={() => setOpenIndex(prev => prev === i ? null : i)}>
-                        <ItemHeader>
-                            <h3>{s.title}</h3>
-                            <span>{openIndex === i ? '-' : '+'}</span>
-                        </ItemHeader>
-                        <ItemContent ref={el => contentRefs.current[i] = el}>
-                            <p>{s.desc}</p>
-                        </ItemContent>
-                    </ServiceItem>
-                ))}
-            </Container>
-        </Section>
-    );
+  return (
+    <Section>
+      <Container>
+        {services.map((s, i) => (
+          <ServiceItem key={i} onClick={() => setOpenIndex(prev => prev === i ? null : i)}>
+            <ItemHeader>
+              <h3>{s.title}</h3>
+              <span>{openIndex === i ? '-' : '+'}</span>
+            </ItemHeader>
+            <ItemContent ref={el => contentRefs.current[i] = el}>
+              <p>{s.desc}</p>
+            </ItemContent>
+          </ServiceItem>
+        ))}
+      </Container>
+    </Section>
+  );
 };
 
 export default ServiceList;

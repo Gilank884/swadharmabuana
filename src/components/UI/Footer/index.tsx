@@ -71,7 +71,7 @@ const Footer = () => {
             </Translator>
             <CopyRight>
               <Image src={ic_copyright} alt="copyright svg" />
-              <span>2025 PT. Swadharma Sanggah Buana.</span>
+              <span>By Peristiwa Kreatif Nusantara</span>
             </CopyRight>
           </FooterBottom>
         </FooterMainContent>

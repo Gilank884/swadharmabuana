@@ -5,7 +5,7 @@ import StatsCounter from '@/components/Business/StatsCounter';
 
 export default function Business() {
     return (
-        <main style={{ minHeight: '100vh', paddingTop: '-5px', backgroundColor: 'var(--Background)' }}>
+        <main style={{ minHeight: '100vh' }}>
             <BusinessHero />
             <SectorsShowcase />
             <StatsCounter />

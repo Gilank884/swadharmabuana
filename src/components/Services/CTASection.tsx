@@ -6,7 +6,6 @@ import gsap from 'gsap';
 
 const Section = styled.section`
   padding: 8rem 2rem;
-  background-color: var(--Background);
   display: flex;
   flex-direction: column;
   align-items: center;

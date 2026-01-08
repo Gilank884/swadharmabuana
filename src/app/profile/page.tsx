@@ -6,7 +6,7 @@ import {
 } from '@/components';
 export default function Profile() {
     return (
-        <main style={{ minHeight: '100vh', paddingTop: '80px', backgroundColor: 'var(--Background)' }}>
+        <main style={{ minHeight: '100vh' }}>
             <ProfileHero />
             <HistoryTimeline />
             <ValuesSection />

@@ -10,7 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
 /* WRAPPER */
 const Section = styled.section`
   padding: 6rem 2rem;
-  background: var(--Background);
   position: relative;
   overflow: hidden;
 `;
@@ -85,7 +84,7 @@ const Card = styled.div<{ taller?: boolean }>`
   /* VISI lebih tinggi */
   min-height: ${(props) => (props.taller ? '420px' : '350px')};
 
-  background: linear-gradient(160deg, #1b1b1b, #242424);
+  background: #f1f1f1ff;
   border: 1px solid #2f2f2f;
   box-shadow: 0 0 40px rgba(0, 200, 120, 0.07);
 
@@ -101,12 +100,12 @@ const Card = styled.div<{ taller?: boolean }>`
 
   h3 {
     font-size: 2rem;
-    color: var(--emerald);
+    color: #6acb24ff;
     margin-bottom: 1.3rem;
   }
 
   p {
-    color: #d3d3d3;
+    color: #000000ff;
     line-height: 1.7;
     font-size: 1.1rem;
   }

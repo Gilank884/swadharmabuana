@@ -171,6 +171,7 @@ export const Translator = styled.div`
 `;
 
 export const CopyRight = styled.div`
+color: #000000ff;
   font-size: 1rem;
   font-weight: 400;
   display: flex;

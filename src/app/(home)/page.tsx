@@ -4,7 +4,7 @@ import {
   FinancialFuture,
   FinancilaFreedom,
   HeroSection,
-  OffersSection,
+  HistoryTimeline
 } from '@/components';
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
     <main>
       <HeroSection />
       <Featured />
-      <OffersSection />
+      <HistoryTimeline />
       <FinancilaFreedom />
       <FinancialFuture />
       <FAQ />
